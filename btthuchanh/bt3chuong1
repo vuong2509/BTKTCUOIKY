@@ -1,0 +1,9 @@
+def gcd(a,b):
+    if b==0:
+        return a
+    else:
+        return gcd(b, a%b)
+so1 = int(input("nhap so 1:"))
+so2 = int(input("nhap so 2:"))
+so = gcd(so1,so2)
+print(f"gcd cua {so1} va {so2} la: {so}")

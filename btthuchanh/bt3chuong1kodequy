@@ -1,0 +1,8 @@
+def gcd(a, b):
+  
+  while b != 0:
+    a, b = b, a % b
+  return a
+a = int(input("nhập số a: "))
+b = int(input("nhập số b: "))
+print(f"GCD(a,b) = {gcd(a, b)}")

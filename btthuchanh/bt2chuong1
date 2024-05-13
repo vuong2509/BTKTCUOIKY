@@ -1,0 +1,22 @@
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+def neper(n):
+    sum_ak = 0
+    for k in range(n + 1):
+        ak = 1 / factorial(k)
+        sum_ak += ak
+    return sum_ak
+
+# Nhập số nguyên n
+n = int(input("Nhập số nguyên n (n >= 0): "))
+
+if n < 0:
+    print("Vui lòng nhập số nguyên không âm.")
+else:
+    result = neper(n)
+    print("Tổng của các số hạng từ a0 đến a{} là: {:.10f}".format(n, result))
+    
