@@ -1,0 +1,39 @@
+class TuDien:
+  def __init__(self):
+    self.tu_dien = {}
+
+  def Nhap_Tu(self, tu, tu_dong_nghia, tu_trai_nghia):
+    """
+    Hàm này dùng để nhập một từ và một tửừ đồng nghĩa (nếu có) và một từ
+    trái nghĩa (nếu có) của từ này vào từ điển td. Hàm băm là hàm lấy ký tự
+    đầu tiên của một từ để lưu trữ từ điển.
+    """
+    tu_dau = tu[0].lower()
+    if tu_dau not in self.tu_dien:
+      self.tu_dien[tu_dau] = {}
+    self.tu_dien[tu_dau][tu] = (tu_dong_nghia, tu_trai_nghia)
+
+  def Tra_Tu(self, tu):
+    """
+    Hàm này trả về từ đồng nghĩa và từ trái nghĩa của từ cần tra tu có trong
+    từ điển td.
+    """
+    tu_dau = tu[0].lower()
+    if tu_dau in self.tu_dien and tu in self.tu_dien[tu_dau]:
+      return self.tu_dien[tu_dau][tu]
+    else:
+      return None
+
+
+tu_dien = TuDien()
+
+tu_dien.Nhap_Tu("hoa", "hoa hồng", "hoa mai")
+tu_dien.Nhap_Tu("cây", "cây cối", "thảo mộc")
+
+tu_dong_nghia, tu_trai_nghia = tu_dien.Tra_Tu("hoa")
+print(f"Từ đồng nghĩa của 'hoa': {tu_dong_nghia}")
+print(f"Từ trái nghĩa của 'hoa': {tu_trai_nghia}")
+
+tu_dong_nghia, tu_trai_nghia = tu_dien.Tra_Tu("cây")
+print(f"Từ đồng nghĩa của 'cây': {tu_dong_nghia}")
+print(f"Từ trái nghĩa của 'cây': {tu_trai_nghia}")
