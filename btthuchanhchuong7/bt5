@@ -1,0 +1,35 @@
+class DoThi:
+    def __init__(self):
+        self.adj = {}
+
+    def themCanh(self, u, v):
+        if u not in self.adj:
+            self.adj[u] = []
+        self.adj[u].append(v)
+
+        if v not in self.adj:
+            self.adj[v] = []
+        self.adj[v].append(u)
+
+    def BacDinh(self, v):
+        dem = 0
+        for i in self.adj[v]:
+            dem += 1
+        return dem
+
+# Tạo một đồ thị vô hướng
+dt = DoThi()
+
+# Thêm các cạnh cho đồ thị
+dt.themCanh(1, 2)
+dt.themCanh(1, 3)
+dt.themCanh(2, 4)
+dt.themCanh(3, 4)
+
+# Tính bậc của đỉnh 1
+bacDinh1 = dt.BacDinh(1)
+print("Bậc của đỉnh 1:", bacDinh1)  # In ra: Bậc của đỉnh 1: 2
+
+# Tính bậc của đỉnh 4
+bacDinh4 = dt.BacDinh(4)
+print("Bậc của đỉnh 4:", bacDinh4)  # In ra: Bậc của đỉnh 4: 2

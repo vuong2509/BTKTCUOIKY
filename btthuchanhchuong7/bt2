@@ -1,0 +1,48 @@
+def SoThanhPhan(dt: dict) -> int:
+  """
+  Tính số thành phần liên thông trong đồ thị.
+
+  Args:
+    dt: Từ điển biểu diễn đồ thị, với khóa là đỉnh và giá trị là danh sách các đỉnh lân cận.
+
+  Returns:
+    Số thành phần liên thông.
+  """
+
+  visited = set()  # Tập các đỉnh đã được duyệt
+  thanhPhan = 0  # Số thành phần liên thông
+
+  for dinh in dt:
+    if dinh not in visited:
+      thanhPhan += 1
+      DuyetDFS(dt, dinh, visited)
+
+  return thanhPhan
+
+
+def DuyetDFS(dt: dict, dinh: int, visited: set) -> None:
+  """
+  Duyệt đồ thị bằng thuật toán DFS.
+
+  Args:
+    dt: Từ điển biểu diễn đồ thị.
+    dinh: Đỉnh bắt đầu duyệt.
+    visited: Tập các đỉnh đã được duyệt.
+  """
+
+  visited.add(dinh)
+
+  for v in dt[dinh]:
+    if v not in visited:
+      DuyetDFS(dt, v, visited)
+
+dt = {
+  1: [2, 3],
+  2: [1, 4],
+  3: [1, 5],
+  4: [2, 6],
+  5: [3, 6],
+  6: [4, 5]
+}
+
+print(SoThanhPhan(dt))  # In ra 2

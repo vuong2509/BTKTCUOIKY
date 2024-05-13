@@ -1,0 +1,46 @@
+def SoCungRa(v):
+  """
+  Trả về số cung đi ra khỏi đỉnh v trong đồ thị hữu hướng dt.
+
+  Args:
+    v: Đỉnh cần kiểm tra.
+
+  Returns:
+    Số cung đi ra khỏi đỉnh v.
+  """
+  # Kiểm tra xem v có tồn tại trong dt hay không.
+  if v not in dt:
+    return 0
+
+  # Khởi tạo biến đếm.
+  dem = 0
+
+  # Duyệt qua danh sách kề của đỉnh v.
+  for u in dt[v]:
+    # Đếm số cung đi ra khỏi đỉnh v.
+    dem += 1
+
+  # Trả về kết quả.
+  return dem
+
+# Khởi tạo đồ thị hữu hướng dt.
+dt = {
+  "A": ["B", "C"],
+  "B": ["D", "E"],
+  "C": ["F"],
+  "D": [],
+  "E": [],
+  "F": []
+}
+
+# Đếm số cung đi ra khỏi đỉnh A.
+so_cung_ra = dt.SoCungRa("A")
+
+# In kết quả.
+print(so_cung_ra)  # In: 2
+
+# Đếm số cung đi ra khỏi đỉnh G (không tồn tại trong dt).
+so_cung_ra = dt.SoCungRa("G")
+
+# In kết quả.
+print(so_cung_ra)  # In: 0

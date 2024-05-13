@@ -1,0 +1,66 @@
+def dt_lien_thong(dt):
+    """Kiểm tra xem đồ thị dt có liên thông hay không.
+
+    Args:
+        dt: Một đồ thị (vô hướng hoặc hữu hướng).
+
+    Returns:
+        Giá trị True nếu đồ thị liên thông, False ngược lại.
+    """
+
+    # Khởi tạo tập đã duyệt
+    da_duyet = set()
+
+    # Duyệt từ một đỉnh bất kỳ
+    for dinh in dt:
+        if dinh not in da_duyet:
+            if not _duyet_bfs(dt, dinh, da_duyet):
+                return False
+
+    return True
+
+
+def _duyet_bfs(dt, dinh_bat_dau, da_duyet):
+    """Duyệt đồ thị bằng thuật toán tìm kiếm theo chiều rộng (BFS) từ đỉnh bắt đầu.
+
+    Args:
+        dt: Một đồ thị (vô hướng hoặc hữu hướng).
+        dinh_bat_dau: Đỉnh bắt đầu duyệt.
+        da_duyet: Tập đã duyệt.
+
+    Returns:
+        Giá trị True nếu đồ thị liên thông, False ngược lại.
+    """
+
+    # Khởi tạo hàng đợi
+    hang_doi = [dinh_bat_dau]
+
+    while hang_doi:
+        # Lấy đỉnh đầu tiên trong hàng đợi
+        dinh_hien_tai = hang_doi.pop(0)
+
+        # Đánh dấu đỉnh hiện tại là đã duyệt
+        da_duyet.add(dinh_hien_tai)
+
+        # Thêm các đỉnh lân cận vào hàng đợi
+        for dinh_lan_can in dt[dinh_hien_tai]:
+            if dinh_lan_can not in da_duyet:
+                hang_doi.append(dinh_lan_can)
+
+    # Kiểm tra xem tất cả các đỉnh đã được duyệt hay chưa
+    return len(da_duyet) == len(dt)
+
+
+# Ví dụ sử dụng
+
+dt = {
+    1: [2, 3],
+    2: [1, 4],
+    3: [1, 5],
+    4: [2, 6],
+    5: [3, 6],
+    6: [4, 5],
+}
+
+lien_thong = dt_lien_thong(dt)
+print(f"Đồ thị có liên thông hay không: {lien_thong}")

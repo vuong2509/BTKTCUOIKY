@@ -1,0 +1,29 @@
+# Tạo lớp đồ thị
+class DoThi:
+    def __init__(self, is_huong):
+        self.is_huong = is_huong
+        self.dinhs = {}
+        self.canhs = {}
+
+    def ChuaDinh(self, v):
+        return v in self.dinhs
+
+# Tạo đồ thị vô hướng
+dt = DoThi(False)
+
+# Thêm các đỉnh vào đồ thị
+dt.dinhs["A"] = True
+dt.dinhs["B"] = True
+dt.dinhs["C"] = True
+
+# Kiểm tra xem đỉnh "A" có là đỉnh của đồ thị hay không
+if dt.ChuaDinh("A"):
+    print("Đỉnh A là đỉnh của đồ thị")
+else:
+    print("Đỉnh A không phải là đỉnh của đồ thị")
+
+# Kiểm tra xem đỉnh "D" có là đỉnh của đồ thị hay không
+if dt.ChuaDinh("D"):
+    print("Đỉnh D là đỉnh của đồ thị")
+else:
+    print("Đỉnh D không phải là đỉnh của đồ thị")

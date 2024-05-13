@@ -1,0 +1,30 @@
+def ChuTrinhDFS(dt, u, parent):
+  # Đánh dấu đỉnh u đã được duyệt
+  visited.add(u)
+
+  # Duyệt qua các đỉnh kề với u
+  for v in dt[u]:
+    # Xử lý trường hợp back edge (cạnh ngược)
+    if v in visited and v != parent:
+      return True
+    else:
+      if v not in visited:
+        if ChuTrinhDFS(dt, v, u) == True:
+          return True
+
+  # Loại bỏ đỉnh u khỏi tập đã duyệt
+  visited.remove(u)
+  return False
+
+def ChuTrinh(dt):
+  # Khởi tạo tập các đỉnh đã duyệt
+  visited = set()
+
+  # Duyệt qua các thành phần liên thông của đồ thị
+  for u in range(len(dt)):
+    if u not in visited:
+      if ChuTrinhDFS(dt, u, None) == True:
+        return True
+
+  # Duyệt qua tất cả các đỉnh mà không gặp chu trình
+  return False

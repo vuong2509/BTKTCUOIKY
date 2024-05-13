@@ -1,0 +1,28 @@
+def dt_SoCungVao(v):
+  """Trả về số cung đi vào đỉnh v trong đồ thị hữu hướng dt."""
+  # Kiểm tra v có phải là đỉnh hợp lệ của đồ thị dt hay không.
+  if v not in dt.Dinh:
+    raise ValueError("Đỉnh v không hợp lệ.")
+  # Khởi tạo biến đếm số cung đi vào đỉnh v.
+  so_cung_vao = 0
+  # Duyệt qua từng đỉnh u trong đồ thị dt.
+  for u in dt.Dinh:
+    # Kiểm tra xem có cung nào từ u đi đến v hay không.
+    if u in dt.Canh[v]:
+      so_cung_vao += 1
+  # Trả về số cung đi vào đỉnh v.
+  return so_cung_vao
+dt = DoThiHuong()
+
+dt.ThemDinh("a")
+dt.ThemDinh("b")
+dt.ThemDinh("c")
+dt.ThemDinh("d")
+
+dt.ThemCanh("a", "b")
+dt.ThemCanh("b", "c")
+dt.ThemCanh("c", "a")
+dt.ThemCanh("d", "a")
+
+so_cung_vao_a = dt_SoCungVao("a")
+print(so_cung_vao_a)  # In ra 2

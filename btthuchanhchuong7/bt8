@@ -1,0 +1,45 @@
+def DuongDi(v1, v2, visited):
+  """
+  Hàm đệ quy để kiểm tra xem có đường đi nào giữa hai đỉnh v1 và v2 trong đồ thị hay không.
+
+  Args:
+    v1: Đỉnh bắt đầu.
+    v2: Đỉnh kết thúc.
+    visited: Tập hợp các đỉnh đã được truy cập.
+
+  Returns:
+    True nếu có đường đi từ v1 đến v2, False nếu không.
+  """
+
+  # Đánh dấu đỉnh hiện tại là đã truy cập
+  visited.add(v1)
+
+  # Kiểm tra xem đỉnh hiện tại có phải là đỉnh v2 hay không
+  if v1 == v2:
+    return True
+
+  # Duyệt qua tất cả các đỉnh lân cận chưa được truy cập của đỉnh hiện tại
+  for neighbor in graph[v1]:
+    if neighbor not in visited:
+      if DuongDi(neighbor, v2, visited):
+        return True
+
+  # Không tìm thấy đường đi nào đến v2
+  return False
+
+# Tạo danh sách kề cho đồ thị
+graph = {
+  1: [2, 3],
+  2: [1, 4],
+  3: [1],
+  4: [2]
+}
+
+# Khởi tạo tập hợp các đỉnh đã truy cập
+visited = set()
+
+# Kiểm tra xem có đường đi nào giữa đỉnh 1 và đỉnh 4 hay không
+if DuongDi(1, 4, visited):
+  print("Có đường đi từ đỉnh 1 đến đỉnh 4")
+else:
+  print("Không có đường đi từ đỉnh 1 đến đỉnh 4")
