@@ -1,0 +1,46 @@
+def caySoNutha(node):
+  """
+  Đếm số nút lá của cây nhị phân.
+
+  Args:
+    node: Nút gốc của cây nhị phân.
+
+  Returns:
+    Số nút lá của cây.
+  """
+  if node is None:
+    return 0
+  
+  # Đếm số nút lá của cây con bên trái.
+  left_count = caySoNutha(node.left)
+  
+  # Đếm số nút lá của cây con bên phải.
+  right_count = caySoNutha(node.right)
+  
+  # Nếu nút hiện tại là nút lá, tăng biến đếm số nút lá lên 1.
+  if node.left is None and node.right is None:
+    leaf_count = 1
+  else:
+    leaf_count = 0
+  
+  # Trả về tổng số nút lá của cây con bên trái, cây con bên phải và nút hiện tại.
+  return leaf_count + left_count + right_count
+class Node:
+  """
+  Nút của cây nhị phân.
+  """
+  def __init__(self, info):
+    self.info = info
+    self.left = None
+    self.right = None
+
+# Tạo một cây nhị phân.
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+# Đếm số nút lá của cây.
+leaf_count = caySoNutha(root)
+print("Số nút lá của cây:", leaf_count)

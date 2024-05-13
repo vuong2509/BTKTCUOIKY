@@ -1,0 +1,37 @@
+class Node:
+    def __init__(self, info):
+        self.info = info
+        self.left = None
+        self.right = None
+
+def height(node):
+    if node is None:
+        return 0
+    return max(height(node.left), height(node.right)) + 1
+
+def get_balance(node):
+    if node is None:
+        return 0
+    return height(node.left) - height(node.right)
+
+def is_avl(node):
+    if node is None:
+        return True
+    left_balance = get_balance(node.left)
+    right_balance = get_balance(node.right)
+    if abs(left_balance) > 1 or abs(right_balance) > 1:
+        return False
+    return is_avl(node.left) and is_avl(node.right)
+
+cay = Node(10)
+cay.left = Node(5)
+cay.right = Node(15)
+cay.left.left = Node(2)
+cay.left.right = Node(7)
+cay.right.left = Node(13)
+cay.right.right = Node(18)
+
+if is_avl(cay):
+    print("Cây là cây AVL")
+else:
+    print("Cây không phải là cây AVL")

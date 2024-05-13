@@ -1,0 +1,66 @@
+def CanBangHoanToan(cay):
+  """
+  Kiểm tra xem một cây nhị phân có cân bằng hoàn toàn hay không.
+
+  Args:
+    cay: Cây nhị phân cần kiểm tra.
+
+  Returns:
+    True nếu cây cân bằng hoàn toàn, False nếu không.
+  """
+
+  if cay is None:
+    return True
+
+  # Duyệt trước theo mức
+  hang_hien_tai = [cay]
+  while hang_hien_tai:
+    so_nut_moi = len(hang_hien_tai)
+    for i in range(so_nut_moi):
+      nut = hang_hien_tai[i]
+      # Kiểm tra số nút con của nút hiện tại
+      so_nut_con_trai = SoNutCon(nut.left)
+      so_nut_con_phai = SoNutCon(nut.right)
+      if abs(so_nut_con_trai - so_nut_con_phai) > 1:
+        return False
+      # Thêm nút con vào hàng đợi
+      if nut.left:
+        hang_hien_tai.append(nut.left)
+      if nut.right:
+        hang_hien_tai.append(nut.right)
+    # Xóa hàng hiện tại
+    hang_hien_tai = hang_hien_tai[so_nut_moi:]
+
+  return True
+
+def SoNutCon(cay):
+  """
+  Tính số nút con của một nút trong cây nhị phân.
+
+  Args:
+    cay: Nút cần tính số nút con.
+
+  Returns:
+    Số nút con của nút.
+  """
+
+  if cay is None:
+    return 0
+  else:
+    return SoNutCon(cay.left) + SoNutCon(cay.right) + 1
+
+class Node:
+  def __init__(self, info):
+    self.info = info
+    self.left = None
+    self.right = None
+
+cay = Node(1)
+cay.left = Node(2)
+cay.right = Node(3)
+cay.left.left = Node(4)
+cay.left.right = Node(5)
+cay.right.left = Node(6)
+cay.right.right = Node(7)
+
+print(CanBangHoanToan(cay))  # Output: True

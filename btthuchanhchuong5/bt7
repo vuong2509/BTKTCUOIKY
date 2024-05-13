@@ -1,0 +1,32 @@
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.left = None
+    self.right = None
+
+def copy_tree(root):
+  if root is None:
+    return None
+  else:
+    new_node = Node(root.data)
+    new_node.left = copy_tree(root.left)
+    new_node.right = copy_tree(root.right)
+    return new_node
+
+# Ví dụ
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+
+copied_tree = copy_tree(root)
+
+print(root.data)  # Output: 1
+print(copied_tree.data)  # Output: 1
+
+print(root.left.data)  # Output: 2
+print(copied_tree.left.data)  # Output: 2
+
+print(root.right.data)  # Output: 3
+print(copied_tree.right.data)  # Output: 3
+

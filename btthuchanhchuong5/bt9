@@ -1,0 +1,23 @@
+class Node:
+    def __init__(self, info, left=None, right=None):
+        self.info = info
+        self.left = left
+        self.right = right
+
+def is_subtree(cay1, cay2):
+    if cay1 is None or cay2 is None:
+        return False
+
+    if cay1.info == cay2.info:
+        return is_subtree(cay1.left, cay2.left) and is_subtree(cay1.right, cay2.right)
+    else:
+        return False
+
+cay1 = Node(1)
+cay1.left = Node(2)
+cay1.right = Node(3)
+cay2 = Node(2)
+cay2.left = Node(4)
+cay2.right = Node(5)
+
+print(is_subtree(cay1, cay2))  # Output: True

@@ -1,0 +1,27 @@
+class Node:
+ def KiemTraBST(cay):
+  # Duyệt qua cây theo thứ tự trước
+  if cay is None:
+    return True
+  else:
+    # So sánh giá trị của nút hiện tại với giá trị của hai nút con
+    if cay.Data > cay.Left.Data and cay.Data < cay.Right.Data:
+      # Đệ quy kiểm tra hai nút con
+      return KiemTraBST(cay.Left) and KiemTraBST(cay.Right)
+    else:
+      return False
+
+# Tạo một cây nhị phân
+cay = Node(10)
+cay.Left = Node(5)
+cay.Right = Node(15)
+cay.Left.Left = Node(3)
+cay.Left.Right = Node(7)
+cay.Right.Left = Node(13)
+cay.Right.Right = Node(17)
+
+# Kiểm tra xem cây có phải là cây BST hay không
+if KiemTraBST(cay):
+  print("Cây là cây BST")
+else:
+  print("Cây không phải là cây BST")

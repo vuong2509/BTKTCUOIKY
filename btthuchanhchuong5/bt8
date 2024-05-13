@@ -1,0 +1,30 @@
+class Cay:
+  def __init__(self, info, left=None, right=None):
+    self.info = info
+    self.left = left
+    self.right = right
+
+  def SoSanh(self, cay2):
+    if self is None or cay2 is None:
+      return True  # Sửa lỗi
+    if self.info != cay2.info:
+      return False
+    if self.left is None and cay2.left is None:
+      return True  # Sửa lỗi
+    if self.left is None or cay2.left is None:
+      return False
+    if self.right is None and cay2.right is None:
+      return True  # Sửa lỗi
+    if self.right is None or cay2.right is None:
+      return False
+    return self.left.SoSanh(cay2.left) and self.right.SoSanh(cay2.right)
+
+cay1 = Cay(1)
+cay1.left = Cay(2)
+cay1.right = Cay(3)
+
+cay2 = Cay(1)
+cay2.left = Cay(2)
+cay2.right = Cay(3)
+
+print(cay1.SoSanh(cay2))  # In ra True

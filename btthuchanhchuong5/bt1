@@ -1,0 +1,34 @@
+def count_nodes(node):
+    """
+    Đếm số nút trong cây nhị phân.
+
+    Args:
+        node: Nút gốc của cây nhị phân.
+
+    Returns:
+        Số nút trong cây nhị phân.
+    """
+
+    if node is None:
+        return 0
+
+    left_count = count_nodes(node.left)
+    right_count = count_nodes(node.right)
+
+    return 1 + left_count + right_count
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+# Tạo cây nhị phân
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+# Đếm số nút trong cây
+number_of_nodes = count_nodes(root)
+print(number_of_nodes)  # Output: 5

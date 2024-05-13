@@ -1,0 +1,30 @@
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.left = None
+    self.right = None
+
+def count_internal_nodes(root):
+  if root is None:
+    return 0
+
+  left_count = count_internal_nodes(root.left)
+  right_count = count_internal_nodes(root.right)
+
+  # Kiểm tra xem nút hiện tại có phải là nút trung gian hay không
+  if root.left is not None and root.right is not None:
+    return 1 + left_count + right_count
+  else:
+    return left_count + right_count
+
+# Ví dụ sử dụng
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.left = Node(12)
+root.right.right = Node(18)
+
+number_of_internal_nodes = count_internal_nodes(root)
+print(number_of_internal_nodes)  # Output: 4

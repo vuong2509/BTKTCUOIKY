@@ -1,0 +1,38 @@
+class Node:
+  def __init__(self, info, left=None, right=None):
+    self.info = info
+    self.left = left
+    self.right = right
+
+def is_bst_tuan_tu(root):
+  if root is None:
+    return True
+
+  is_left_bst_tuan_tu = is_bst_tuan_tu(root.left)
+  is_right_bst_tuan_tu = is_bst_tuan_tu(root.right)
+
+  if is_left_bst_tuan_tu and is_right_bst_tuan_tu:
+    if root.left is not None and root.left.info > root.info:
+      return False
+
+    if root.right is not None and root.right.info < root.info:
+      return False
+
+    return True
+
+  return False
+
+# Tạo cây BST
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(2)
+root.left.right = Node(7)
+root.right.left = Node(12)
+root.right.right = Node(18)
+
+# Kiểm tra cây BST có phải là cây BST tuần tự hay không
+if is_bst_tuan_tu(root):
+  print("Cây BST là cây BST tuần tự")
+else:
+  print("Cây BST không phải là cây BST tuần tự")
