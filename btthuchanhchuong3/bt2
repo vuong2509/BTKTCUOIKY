@@ -1,0 +1,49 @@
+class Node:
+    def __init__(self, heso, somu, ketiep):
+        self.heso = heso
+        self.somu = somu
+        self.ketiep = ketiep
+
+
+def RutGon(dathuc):
+    # Khởi tạo biến lưu trữ kết quả
+    kq = None
+
+    # Duyệt qua từng phần tử trong đa thức
+    p = dathuc
+    while p is not None:
+        # Tìm kiếm các phần tử có cùng số mũ
+        q = p.ketiep
+        while q is not None and q.somu == p.somu:
+            # Cộng hệ số của hai phần tử
+            p.heso += q.heso
+            # Lưu lại phần tử tiếp theo của q
+            temp = q.ketiep
+            # Xóa phần tử q
+            del q
+            q = temp
+
+        # Nếu hệ số của p bằng 0 thì xóa p
+        if p.heso == 0:
+            temp = p.ketiep
+            del p
+            p = temp
+        else:
+            # Thêm p vào kết quả
+            if kq is None:
+                kq = p
+            else:
+                p.ketiep = kq
+                kq = p
+
+    return kq
+
+
+# Ví dụ sử dụng
+dathuc = Node(1, 2, Node(2, 1, Node(3, 0, None)))
+kq = RutGon(dathuc)
+
+# In kết quả
+while kq is not None:
+    print(f"{kq.heso}x^{kq.somu}", end=" ")
+    kq = kq.ketiep

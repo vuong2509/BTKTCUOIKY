@@ -1,0 +1,29 @@
+class Node:
+    def __init__(self, heso, somu, ketiep):
+        self.heso = heso
+        self.somu = somu
+        self.ketiep = ketiep
+
+def dathuc_doidau(dathuc):
+    """
+    Hàm đổi dấu đại số của mỗi số hạng trong đa thức.
+    Tham số:
+        dathuc: Danh sách liên kết lưu trữ đa thức.
+    Trả về:
+        Danh sách liên kết lưu trữ đa thức sau khi đổi dấu.
+    """
+    p = dathuc
+    while p != None:
+        p.heso = -p.heso
+        p = p.ketiep
+    return dathuc
+
+# Ví dụ sử dụng
+dathuc = Node(1, 2, Node(-2, 1, None))
+dathuc_doidau(dathuc)
+
+# In ra đa thức sau khi đổi dấu
+p = dathuc
+while p != None:
+    print(f"{p.heso}x^{p.somu}", end=" ")
+    p = p.ketiep

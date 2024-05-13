@@ -1,0 +1,47 @@
+class Node:
+    def __init__(self, heso, somu, ketiep=None):
+        self.HeSo = heso
+        self.SoMu = somu
+        self.KeTiep = ketiep
+
+def Them(dathuc, heso, somu):
+    """
+    Thêm một số hạng có hệ số là heso và số mũ là somu vào đa thức chưa rút gọn.
+
+    Tham số:
+        dathuc: Danh sách liên kết biểu diễn đa thức.
+        heso: Hệ số của số hạng cần thêm.
+        somu: Số mũ của số hạng cần thêm.
+
+    Trả về:
+        Danh sách liên kết biểu diễn đa thức sau khi thêm số hạng.
+    """
+
+    # Tạo node mới biểu diễn số hạng cần thêm
+    p = Node(heso, somu)
+
+    # Thêm node mới vào đầu danh sách
+    if dathuc is None:
+        return p
+
+    # Tìm vị trí để thêm node mới
+    q = dathuc
+    while q.KeTiep is not None and q.KeTiep.SoMu > somu:
+        q = q.KeTiep
+
+    # Thêm node mới vào sau node q
+    p.KeTiep = q.KeTiep
+    q.KeTiep = p
+
+    return dathuc
+
+# Tạo đa thức
+dathuc = Node(1, 2)
+dathuc = Them(dathuc, 2, 1)
+dathuc = Them(dathuc, 3, 0)
+
+# In ra các phần tử trong đa thức
+p = dathuc
+while p is not None:
+    print(f"Hệ số: {p.HeSo}, Số mũ: {p.SoMu}")
+    p = p.KeTiep

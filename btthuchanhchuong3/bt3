@@ -1,0 +1,108 @@
+class Node:
+    def __init__(self, heso, somu, ketiep=None):
+        self.heso = heso
+        self.somu = somu
+        self.ketiep = ketiep
+
+
+def Cong(dathuc1, dathuc2):
+    """
+    Hàm cộng hai đa thức
+
+    Tham số:
+        dathuc1 (Node): Đa thức thứ nhất
+        dathuc2 (Node): Đa thức thứ hai
+
+    Trả về:
+        Node: Đa thức kết quả sau khi cộng
+    """
+
+    # Khởi tạo đa thức kết quả
+    dathucKQ = None
+
+    # Duyệt qua từng phần tử của hai đa thức
+    while dathuc1 and dathuc2:
+        # So sánh số mũ của hai phần tử
+        if dathuc1.somu > dathuc2.somu:
+            # Thêm phần tử của đa thức thứ nhất vào đa thức kết quả
+            dathucKQ = ThemNode(dathucKQ, dathuc1.heso, dathuc1.somu)
+            dathuc1 = dathuc1.ketiep
+        elif dathuc1.somu < dathuc2.somu:
+            # Thêm phần tử của đa thức thứ hai vào đa thức kết quả
+            dathucKQ = ThemNode(dathucKQ, dathuc2.heso, dathuc2.somu)
+            dathuc2 = dathuc2.ketiep
+        else:
+            # Hai phần tử có cùng số mũ
+            # Cộng hệ số của hai phần tử
+            hesoKQ = dathuc1.heso + dathuc2.heso
+            # Bỏ qua phần tử nếu hệ số bằng 0
+            if hesoKQ != 0:
+                # Thêm phần tử có hệ số mới vào đa thức kết quả
+                dathucKQ = ThemNode(dathucKQ, hesoKQ, dathuc1.somu)
+            # Di chuyển sang phần tử tiếp theo của hai đa thức
+            dathuc1 = dathuc1.ketiep
+            dathuc2 = dathuc2.ketiep
+
+    # Thêm phần tử còn lại của hai đa thức vào đa thức kết quả
+    while dathuc1:
+        dathucKQ = ThemNode(dathucKQ, dathuc1.heso, dathuc1.somu)
+        dathuc1 = dathuc1.ketiep
+    while dathuc2:
+        dathucKQ = ThemNode(dathucKQ, dathuc2.heso, dathuc2.somu)
+        dathuc2 = dathuc2.ketiep
+
+    return dathucKQ
+
+
+def ThemNode(dathuc, heso, somu):
+    """
+    Hàm thêm một phần tử vào đa thức
+
+    Tham số:
+        dathuc (Node): Đa thức
+        heso (float): Hệ số của phần tử
+        somu (int): Số mũ của phần tử
+
+    Trả về:
+        Node: Đa thức sau khi thêm phần tử
+    """
+
+    # Tạo phần tử mới
+    p = Node(heso, somu)
+
+    # Nếu đa thức rỗng
+    if not dathuc:
+        return p
+
+    # Duyệt đến phần tử cuối cùng của đa thức
+    q = dathuc
+    while q.ketiep:
+        q = q.ketiep
+
+    # Thêm phần tử mới vào cuối đa thức
+    q.ketiep = p
+
+    return dathuc
+
+
+def XuatDaThuc(dathuc):
+    """
+    Hàm xuất đa thức
+
+    Tham số:
+        dathuc (Node): Đa thức
+    """
+
+    while dathuc:
+        if dathuc.somu == 0:
+            print(f"{dathuc.heso:.2f}", end="")
+        elif dathuc.somu == 1:
+            print(f"{dathuc.heso:.2f}x", end="")
+        else:
+            print(f"{dathuc.heso:.2f}x^{dathuc.somu}", end="")
+        dathuc = dathuc.ketiep
+    print()
+
+
+# Tạo hai đa thức
+dathuc1 = ThemNode(None, 2, 2)
