@@ -1,0 +1,43 @@
+def a_Giao(a, b):
+  """
+  Trả về một mảng c chứa các số (không trùng lặp) đồng thời có trong mảng a và mảng b và mảng c có thứ tự tăng dần.
+
+  Ví dụ:
+  mảng a chứa các số 1, 5, 3, 7, 9, 4, 2 và mảng b chứa các số 9, 6, 2, 3, 8 thì mảng c chứa các số 3, 9.
+
+  Args:
+    a: Mảng đầu tiên.
+    b: Mảng thứ hai.
+
+  Returns:
+    Mảng c chứa các số (không trùng lặp) đồng thời có trong mảng a và mảng b và mảng c có thứ tự tăng dần.
+  """
+
+  # Tạo một tập hợp rỗng để lưu trữ các số (không trùng lặp) đồng thời có trong mảng a và mảng b.
+  s = set()
+
+  # Thêm các số trong mảng a vào tập hợp s.
+  for x in a:
+    s.add(x)
+
+  # Tạo một mảng rỗng để lưu trữ các số (không trùng lặp) đồng thời có trong mảng a và mảng b.
+  c = []
+
+  # Duyệt qua các số trong mảng b.
+  for x in b:
+    # Kiểm tra xem số x có trong tập hợp s hay không.
+    if x in s:
+      # Thêm số x vào mảng c.
+      c.append(x)
+
+  # Sắp xếp mảng c theo thứ tự tăng dần.
+  c.sort()
+
+  # Trả về mảng c.
+  return c
+
+# Ví dụ
+a = [1, 5, 3, 7, 9, 4, 2]
+b = [9, 6, 2, 3, 8]
+c = a_Giao(a, b)
+print(c)  # Output: [3, 9]

@@ -1,0 +1,35 @@
+def aDuynhat(a):
+  """
+  Trả về một mảng mới chứa các số duy nhất trong mảng a được sắp xếp theo thứ tự tăng dần.
+
+  Args:
+    a: Mảng một chiều chứa các số nguyên.
+
+  Returns:
+    Mảng mới chứa các số duy nhất trong mảng a được sắp xếp theo thứ tự tăng dần.
+  """
+  # Tạo một tập hợp để lưu trữ các số duy nhất trong mảng a.
+  seen = set()
+  # Tạo một mảng mới để lưu trữ các số duy nhất theo thứ tự tăng dần.
+  b = []
+
+  # Duyệt qua mảng a.
+  for num in a:
+    # Kiểm tra xem số hiện tại có trong tập hợp `seen` hay không.
+    if num not in seen:
+      # Thêm số hiện tại vào tập hợp `seen`.
+      seen.add(num)
+      # Thêm số hiện tại vào mảng `b`.
+      b.append(num)
+
+  # Sắp xếp mảng `b` theo thứ tự tăng dần.
+  b.sort()
+
+  # Trả về mảng `b`.
+  return b
+
+
+# Ví dụ sử dụng
+a = [1, 5, 3, 7, 5, 9, 7]
+b = aDuynhat(a)
+print(b)  # Output: [1, 3, 5, 7, 9]

@@ -1,0 +1,29 @@
+def a_hop(a, b):
+  """
+  Trả về mảng e chứa các số (không trùng lặp) có trong mảng a và/hoặc có trong mảng b và mảng c có thứ tự tăng dần.
+
+  Args:
+    a: Mảng một chiều chứa các số nguyên.
+    b: Mảng một chiều chứa các số nguyên.
+
+  Returns:
+    Mảng e chứa các số (không trùng lặp) có trong mảng a và/hoặc có trong mảng b và mảng c có thứ tự tăng dần.
+  """
+  # Tạo tập hợp e để lưu trữ các số (không trùng lặp) có trong mảng a và/hoặc có trong mảng b.
+  e = set()
+  # Thêm các phần tử của mảng a vào tập hợp e.
+  for x in a:
+    e.add(x)
+  # Thêm các phần tử của mảng b vào tập hợp e.
+  for x in b:
+    e.add(x)
+  # Chuyển đổi tập hợp e thành danh sách e_sorted và sắp xếp danh sách này theo thứ tự tăng dần.
+  e_sorted = list(e)
+  e_sorted.sort()
+  return e_sorted
+
+# Ví dụ
+a = [1, 5, 3, 7, 9, 4, 2]
+b = [9, 6, 2, 3, 8]
+e = a_hop(a, b)
+print(e)  # Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]

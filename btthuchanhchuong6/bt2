@@ -1,0 +1,45 @@
+def Hieu(a, b):
+  """
+  Hàm tìm hiệu số giữa hai mảng một chiều.
+
+  Args:
+    a: Mảng một chiều chứa các số nguyên.
+    b: Mảng một chiều chứa các số nguyên.
+
+  Returns:
+    Mảng một chiều chứa các số không trùng lặp trong mảng a và không có trong mảng b, được sắp xếp theo thứ tự tăng dần.
+  """
+  
+  # Tạo tập hợp để lưu trữ các số đã duyệt
+  S = set()
+
+  # Lặp qua từng phần tử trong mảng a
+  for i in a:
+    # Kiểm tra xem phần tử hiện tại có trong tập hợp S hay không
+    if i in S:
+      continue
+    else:
+      # Thêm phần tử hiện tại vào tập hợp S
+      S.add(i)
+
+  # Tạo mảng mới để lưu trữ các số không trùng lặp trong mảng a và không có trong mảng b
+  c = []
+
+  # Lặp qua từng phần tử trong mảng a
+  for i in a:
+    # Kiểm tra xem phần tử hiện tại có trong mảng b hay không
+    if i not in b:
+      # Thêm phần tử hiện tại vào mảng c
+      c.append(i)
+
+  # Sắp xếp mảng c theo thứ tự tăng dần
+  c.sort()
+
+  # Trả về mảng c
+  return c
+
+# Ví dụ sử dụng
+a = [1, 5, 3, 7, 9, 4, 2]
+b = [9, 6, 2, 3, 8]
+c = Hieu(a, b)
+print(c)  # Kết quả: [1, 4, 5, 7]
