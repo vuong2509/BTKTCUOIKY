@@ -1,0 +1,23 @@
+def tamgiac_tren(mang):
+  """
+  Kiểm tra xem ma trận `mang` có là ma trận tam giác trên hay không.
+
+  Tham số:
+    mang: Ma trận vuông được biểu diễn dưới dạng danh sách lồng nhau.
+
+  Trả về:
+    True nếu ma trận là tam giác trên, False nếu ngược lại.
+  """
+  n = len(mang)
+  for i in range(n):
+    for j in range(i + 1, n):
+      if mang[i][j] != 0:
+        return False
+  return True
+
+# Ví dụ sử dụng
+mang = [[1, 2, 3], [0, 4, 5], [0, 0, 6]]
+if tamgiac_tren(mang):
+  print("Ma trận tam giác trên")
+else:
+  print("Ma trận không phải tam giác trên")

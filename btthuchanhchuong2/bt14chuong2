@@ -1,0 +1,38 @@
+def DayConDauTien(a, b):
+  """
+  Tìm dãy con đầu tiên xuất hiện trong cả hai mảng
+
+  Args:
+    a: Mảng một chiều chứa số nguyên
+    b: Mảng một chiều chứa số nguyên
+
+  Returns:
+    Mảng c chứa dãy con đầu tiên xuất hiện trong cả hai mảng a và b
+  """
+  c = []  # Mảng để lưu trữ dãy con kết quả
+  n = len(a)  # Độ dài của mảng a
+  m = len(b)  # Độ dài của mảng b
+  i = 0  # Vị trí hiện tại trong mảng a
+  j = 0  # Vị trí hiện tại trong mảng b
+  while i < n and j < m:
+    if a[i] == b[j]:
+      # Tìm dãy con chung bắt đầu từ vị trí i và j
+      k = i
+      while k < n and a[k] == b[j]:
+        c.append(a[k])
+        k += 1
+        j += 1
+      # Nếu tìm thấy dãy con chung, trả về
+      if len(c) > 0:
+        return c
+    else:
+      # Di chuyển vị trí trong mảng a
+      i += 1
+  # Không tìm thấy dãy con chung
+  return []
+
+# Ví dụ
+a = [1, 6, 2, 5, 3, 7, 9, 4, 2]
+b = [9, 6, 2, 5, 3, 7, 8]
+c = DayConDauTien(a, b)
+print(c)

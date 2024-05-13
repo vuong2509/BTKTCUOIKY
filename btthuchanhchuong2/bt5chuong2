@@ -1,0 +1,46 @@
+def Cong(a, b):
+  """
+  Hàm cộng hai số nguyên không dấu được biểu diễn dưới dạng mảng một chiều.
+
+  Tham số:
+    a: Mảng một chiều chứa các chữ số của số nguyên thứ nhất.
+    b: Mảng một chiều chứa các chữ số của số nguyên thứ hai.
+
+  Trả về:
+    - Một số nguyên là kết quả của a + b nếu kết quả không bị tràn.
+    - Mảng gồm các số -1 nếu kết quả bị tràn.
+  """
+  # Khởi tạo biến lưu trữ tổng
+  tong = 0
+  # Khởi tạo biến nhớ
+  nho = 0
+  # Duyệt từ vị trí cuối cùng của mảng
+  for i in range(len(a) - 1, -1, -1):
+    # Cộng hai chữ số tại vị trí i của hai mảng
+    tmp = a[i] + b[i] + nho
+    # Xác định nếu có tràn
+    if tmp >= 10:
+      # Ghi nhớ 1
+      nho = 1
+      # Lưu chữ số đơn vị của tổng
+      tong = tmp % 10
+    else:
+      # Không có tràn
+      nho = 0
+      tong = tmp
+    # Cập nhật giá trị tại vị trí i của mảng tổng
+    a[i] = tong
+
+  # Kiểm tra nếu có tràn ở vị trí đầu tiên
+  if nho == 1:
+    # Tràn, trả về mảng -1
+    return [-1] * len(a)
+
+  # Không tràn, trả về mảng tổng
+  return a
+a = [1, 2, 3]
+b = [4, 5, 6]
+
+tong = Cong(a, b)
+
+print(tong)  # Output: [5, 7, 9]

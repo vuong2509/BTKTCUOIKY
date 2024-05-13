@@ -1,0 +1,42 @@
+def NhomHang(mang):
+  """
+  Hàm này in ra nhóm chỉ mục hàng của các hàng giống nhau trong ma trận vuông `mang`.
+
+  Tham số:
+    mang: Ma trận vuông chứa các số nguyên.
+
+  Trả về:
+    None. In ra nhóm chỉ mục hàng của các hàng giống nhau.
+  """
+
+  # Tạo một tập hợp rỗng để lưu trữ các nhóm chỉ mục hàng.
+  nhom_hang = set()
+
+  # Duyệt qua từng hàng của ma trận.
+  for i in range(len(mang)):
+    # Tạo một tập hợp để lưu trữ các chỉ mục hàng của các hàng giống nhau với hàng hiện tại.
+    nhom_hien_tai = {i}
+
+    # Duyệt qua các hàng sau hàng hiện tại.
+    for j in range(i + 1, len(mang)):
+      # Nếu hai hàng giống nhau, thêm chỉ mục hàng sau vào tập hợp.
+      if mang[i] == mang[j]:
+        nhom_hien_tai.add(j)
+
+    # Nếu tập hợp hiện tại không rỗng, thêm vào tập hợp chung và in ra.
+    if nhom_hien_tai:
+      nhom_hang.add(nhom_hien_tai)
+      print(*nhom_hien_tai)
+
+  # Nếu không có nhóm nào được tìm thấy, in ra thông báo.
+  if not nhom_hang:
+    print("Khong co nhom nao duoc tim thay.")
+
+# Ví dụ sử dụng
+mang = [[1, 2, 3],
+       [4, 5, 6],
+       [1, 2, 3],
+       [7, 8, 9],
+       [1, 2, 3]]
+
+NhomHang(mang)

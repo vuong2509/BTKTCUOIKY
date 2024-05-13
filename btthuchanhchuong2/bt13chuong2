@@ -1,0 +1,43 @@
+def Nhan(a, b):
+  """
+  Hàm này nhân hai số nguyên lớn a và b.
+
+  Tham số:
+    a: Số nguyên lớn thứ nhất.
+    b: Số nguyên lớn thứ hai.
+
+  Trả về:
+    Kết quả của phép nhân a x b.
+  """
+
+  # Xác định dấu của kết quả
+  dau = 1
+  if a[0] == 1:
+    dau = -1
+    a[0] = 0
+  if b[0] == 1:
+    dau = -dau
+    b[0] = 0
+
+  # Chuyển đổi các số sang dạng chuỗi
+  a_str = "".join(str(x) for x in a[1:])
+  b_str = "".join(str(x) for x in b[1:])
+
+  # Nhân hai số nguyên dưới dạng chuỗi
+  c_str = str(int(a_str) * int(b_str))
+
+  # Chuyển đổi kết quả sang dạng mảng
+  c = [0] * (len(c_str) + 1)
+  c[0] = dau
+  for i in range(1, len(c)):
+    c[i] = int(c_str[i - 1])
+
+  return c
+
+# Ví dụ sử dụng
+a = [0, 1, 2, 3, 4, 5]
+b = [0, 6, 7, 8, 9]
+c = Nhan(a, b)
+
+# In kết quả
+print(c)

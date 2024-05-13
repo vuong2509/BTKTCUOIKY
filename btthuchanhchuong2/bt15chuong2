@@ -1,0 +1,46 @@
+def DayConDaiNhat(a, b):
+
+  n = len(a)
+  m = len(b)
+
+  # Tạo bảng dp để lưu trữ kết quả tính toán.
+  dp = [[0 for i in range(m + 1)] for j in range(n + 1)]
+
+  # Khởi tạo bảng dp.
+  for i in range(n + 1):
+    for j in range(m + 1):
+      if i == 0 or j == 0:
+        dp[i][j] = 0
+      else:
+        if a[i - 1] == b[j - 1]:
+          dp[i][j] = dp[i - 1][j - 1] + 1
+        else:
+          dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+  # Tìm vị trí bắt đầu và kết thúc của dãy con chung dài nhất.
+  i = n
+  j = m
+  while i > 0 and j > 0:
+    if a[i - 1] == b[j - 1]:
+      i -= 1
+      j -= 1
+    else:
+      if dp[i - 1][j] > dp[i][j - 1]:
+        i -= 1
+      else:
+        j -= 1
+
+  # Tạo mảng c để lưu trữ dãy con chung dài nhất.
+  c = []
+  while i < n and j < m:
+    c.append(a[i])
+    i += 1
+    j += 1
+
+  return c
+a = [1, 6, 2, 5, 3, 7, 9, 4, 2, 8, 1, 5]
+b = [6, 2, 5, 3, 7, 9, 8, 1, 5]
+
+c = DayConDaiNhat(a, b)
+
+print(c)

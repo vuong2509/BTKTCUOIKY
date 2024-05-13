@@ -1,0 +1,62 @@
+def Tru(a, b):
+  """
+  Hàm này trừ hai số nguyên không dấu được biểu diễn dưới dạng mảng một chiều.
+
+  Tham số:
+    a: Mảng một chiều chứa các chữ số của số nguyên không dấu thứ nhất.
+    b: Mảng một chiều chứa các chữ số của số nguyên không dấu thứ hai.
+
+  Trả về:
+    Mảng một chiều chứa các chữ số của hiệu a - b.
+  """
+
+  # Xác định độ dài của hai mảng
+  n = len(a)
+  m = len(b)
+
+  # Chuyển đổi các mảng sang dạng số nguyên
+  so_a = 0
+  for i in range(n):
+    so_a = so_a * 10 + a[i]
+
+  so_b = 0
+  for i in range(m):
+    so_b = so_b * 10 + b[i]
+
+  # Tính hiệu hai số nguyên
+  hieu = so_a - so_b
+
+  # Xử lý trường hợp số âm
+  if hieu < 0:
+    # Đổi vị trí hai số
+    so_a, so_b = so_b, so_a
+    hieu = so_a - so_b
+
+  # Chuyển đổi hiệu sang dạng mảng
+  if hieu == 0:
+    return [0]
+
+  mang_hieu = []
+  while hieu > 0:
+    mang_hieu.append(hieu % 10)
+    hieu //= 10
+
+  mang_hieu.reverse()
+
+  return mang_hieu
+
+# Ví dụ sử dụng
+a = [1, 2, 3, 4, 5]
+b = [5, 4, 3, 2, 1]
+
+hieu = Tru(a, b)
+
+print("Hiệu của hai số là:", hieu)
+
+# Ví dụ sử dụng 2
+a = [5, 4, 3, 2, 1]
+b = [1, 2, 3, 4, 5]
+
+hieu = Tru(a, b)
+
+print("Hiệu của hai số là:", hieu)

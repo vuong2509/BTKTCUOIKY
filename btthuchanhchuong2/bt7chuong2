@@ -1,0 +1,40 @@
+def nhan(a, b):
+  """
+  Nhân hai số nguyên không dấu được biểu diễn dưới dạng mảng.
+
+  Tham số:
+    a: Mảng chứa các chữ số của số nguyên thứ nhất.
+    b: Mảng chứa các chữ số của số nguyên thứ hai.
+
+  Trả về:
+    Mảng chứa các chữ số của tích a * b nếu kết quả không bị tràn,
+    hoặc mảng [-1] nếu kết quả bị tràn.
+  """
+
+  # Khởi tạo mảng kết quả
+  c = [0] * (len(a) + len(b))
+
+  # Thực hiện phép nhân từng chữ số
+  for i in range(len(b)-1, -1, -1):
+    for j in range(len(a)-1, -1, -1):
+      # Tính tích của hai chữ số
+      t = a[j] * b[i]
+
+      # Cập nhật mảng kết quả
+      c[i + j + 1] += t
+      c[i + j] += c[i + j + 1] // 10
+      c[i + j + 1] %= 10
+
+  # Kiểm tra tràn
+  if c[0] > 0:
+    return [-1]
+
+  # Xử lý kết quả
+  return c[1:]
+
+# Ví dụ sử dụng
+a = [1, 2, 3]
+b = [4, 5, 6]
+c = nhan(a, b)
+
+print("Kết quả:", c)

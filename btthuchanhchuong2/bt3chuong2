@@ -1,0 +1,36 @@
+def TrungHang(mang):
+  """
+  Kiểm tra xem ma trận vuông `mang` có ít nhất hai hàng giống nhau hay không.
+
+  Tham số:
+    mang: Ma trận vuông, mỗi phần tử chứa một số nguyên.
+
+  Trả về:
+    True nếu ma trận có ít nhất hai hàng giống nhau, False ngược lại.
+  """
+  n = len(mang)
+
+  # Tạo một tập hợp để lưu trữ các hàng đã được kiểm tra.
+  da_kiem_tra = set()
+
+  # Duyệt qua từng hàng của ma trận.
+  for i in range(n):
+    # Chuyển đổi hàng `i` thành tuple để có thể sử dụng làm key trong tập hợp.
+    hang_i = tuple(mang[i])
+
+    # Kiểm tra xem hàng `i` đã được kiểm tra hay chưa.
+    if hang_i in da_kiem_tra:
+      # Nếu đã được kiểm tra, nghĩa là có ít nhất hai hàng giống nhau.
+      return True
+
+    # Thêm hàng `i` vào tập hợp `da_kiem_tra`.
+    da_kiem_tra.add(hang_i)
+
+  # Nếu duyệt qua hết tất cả các hàng mà không tìm thấy hai hàng giống nhau, trả về False.
+  return False
+
+mang = [[1, 2, 3],
+        [4, 5, 6],
+        [1, 2, 3]]
+
+print(TrungHang(mang))  # True

@@ -1,0 +1,42 @@
+def dao(mang):
+  """
+  Tìm diện tích lớn nhất của các đảo hình chữ nhật trong ma trận.
+
+  Tham số:
+    mang: Ma trận vuông chứa các số nguyên 0 và 1.
+
+  Trả về:
+    Diện tích lớn nhất của các đảo hình chữ nhật.
+  """
+  n = len(mang)
+  # Tạo mảng lưu trữ diện tích lớn nhất của các đảo hình chữ nhật
+  # có kích thước (i, j).
+  max_area = [[0 for _ in range(n)] for _ in range(n)]
+
+  # Duyệt qua từng ô trong ma trận.
+  for i in range(n):
+    for j in range(n):
+      # Nếu ô hiện tại là ô đất.
+      if mang[i][j] == 1:
+        # Diện tích của đảo hình chữ nhật 1x1.
+        max_area[i][j] = 1
+
+        # Tính diện tích của đảo hình chữ nhật 
+        # có kích thước (i, j) dựa trên các đảo nhỏ hơn.
+        if i > 0:
+          max_area[i][j] = max(max_area[i][j], max_area[i-1][j] + 1)
+        if j > 0:
+          max_area[i][j] = max(max_area[i][j], max_area[i][j-1] + 1)
+        if i > 0 and j > 0:
+          max_area[i][j] = max(max_area[i][j], max_area[i-1][j-1] + 1)
+
+  # Diện tích lớn nhất của các đảo hình chữ nhật.
+  max_area_all = max(max(row) for row in max_area)
+
+  return max_area_all
+mang = [[0, 1, 0, 0],
+        [1, 1, 1, 0],
+        [0, 1, 0, 0],
+        [1, 0, 1, 1]]
+
+print(dao(mang))

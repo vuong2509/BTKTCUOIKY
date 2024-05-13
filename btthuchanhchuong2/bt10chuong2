@@ -1,0 +1,43 @@
+def NhomCot(mang):
+  """
+  Hàm này in ra nhóm chỉ mục cột của các cột giống nhau, mỗi nhóm được bắt đầu in ở
+  đầu hàng màn hình.
+
+  Tham số:
+    mang (list): Ma trận vuông, mỗi phần tử chứa một số nguyên.
+
+  Trả về:
+    None
+  """
+
+  # Tạo một tập hợp để lưu trữ các giá trị đã được in
+  da_duoc_in = set()
+
+  # Duyệt qua từng cột
+  for j in range(len(mang[0])):
+    # Nếu giá trị cột hiện tại chưa được in
+    if j not in da_duoc_in:
+      # In ra chỉ mục cột hiện tại và bắt đầu một dòng mới
+      print(f"Cột {j}: ", end="")
+
+      # Lưu trữ giá trị cột hiện tại
+      gia_tri_hien_tai = mang[0][j]
+
+      # Duyệt qua tất cả các hàng
+      for i in range(len(mang)):
+        # Duyệt qua các cột còn lại
+        for k in range(j + 1, len(mang[0])):
+          # Nếu giá trị cột hiện tại và cột j giống nhau
+          if gia_tri_hien_tai == mang[i][k]:
+            # In ra chỉ mục cột j
+            print(f"{k} ", end="")
+
+            # Đánh dấu cột j đã được in
+            da_duoc_in.add(k)
+
+  # In ra dòng mới
+  print()
+
+# Ví dụ sử dụng
+mang = [[1, 2, 3], [4, 5, 6], [1, 2, 3]]
+NhomCot(mang)

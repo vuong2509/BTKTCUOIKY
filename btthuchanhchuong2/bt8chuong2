@@ -1,0 +1,24 @@
+def TamGiacDuoi(mang):
+  """
+  Kiểm tra xem ma trận có phải là ma trận tam giác dưới hay không.
+
+  Tham số:
+    mang: Ma trận vuông.
+
+  Trả về:
+    True nếu ma trận là ma trận tam giác dưới, ngược lại trả về False.
+  """
+
+  for i in range(len(mang)):
+    for j in range(len(mang[0])):
+      if i < j:
+        if mang[i][j] != 0:
+          return False
+
+  return True
+mang = [[1, 0, 0], [2, 3, 0], [4, 5, 6]]
+
+if TamGiacDuoi(mang):
+  print("Ma trận là ma trận tam giác dưới")
+else:
+  print("Ma trận không phải là ma trận tam giác dưới")

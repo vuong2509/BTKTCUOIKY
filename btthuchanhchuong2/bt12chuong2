@@ -1,0 +1,88 @@
+def tru(a, b):
+  """
+  Trừ hai số nguyên lớn được biểu diễn dưới dạng mảng.
+
+  Args:
+      a: Mảng biểu diễn số nguyên a.
+      b: Mảng biểu diễn số nguyên b.
+
+  Returns:
+      Mảng biểu diễn số nguyên kết quả.
+  """
+
+  # Xử lý dấu
+  dau_a = a[0]
+  dau_b = b[0]
+  a = a[1:]
+  b = b[1:]
+
+  # Chuẩn hóa độ dài mảng
+  if len(a) < len(b):
+    a = [0] * (len(b) - len(a)) + a
+  elif len(b) < len(a):
+    b = [0] * (len(a) - len(b)) + b
+
+  # So sánh hai số
+  so_sanh = so_sanh_mang(a, b)
+  if so_sanh == 0:
+    return [0]
+  elif so_sanh == 1:
+    # a >= b
+    hieu = a[:]
+    for i in range(len(b)):
+      hieu[i] -= b[i]
+    for i in range(len(hieu) - 1, -1, -1):
+      if hieu[i] < 0:
+        hieu[i] += 10
+        hieu[i - 1] -= 1
+      else:
+        break
+    while hieu[0] == 0 and len(hieu) > 1:
+      hieu = hieu[1:]
+    return hieu
+  else:
+    # a < b
+    hieu = b[:]
+    for i in range(len(a)):
+      hieu[i] -= a[i]
+    for i in range(len(hieu) - 1, -1, -1):
+      if hieu[i] < 0:
+        hieu[i] += 10
+        hieu[i - 1] -= 1
+      else:
+        break
+    while hieu[0] == 0 and len(hieu) > 1:
+      hieu = hieu[1:]
+    return [-1, *hieu]
+
+# Hàm so sánh hai mảng
+def so_sanh_mang(a, b):
+  """
+  So sánh hai mảng số nguyên.
+
+  Args:
+      a: Mảng số nguyên thứ nhất.
+      b: Mảng số nguyên thứ hai.
+
+  Returns:
+      0: Nếu a == b.
+      1: Nếu a > b.
+      -1: Nếu a < b.
+  """
+  if len(a) < len(b):
+    return -1
+  elif len(b) < len(a):
+    return 1
+  else:
+    for i in range(len(a)):
+      if a[i] < b[i]:
+        return -1
+      elif a[i] > b[i]:
+        return 1
+    return 0
+
+# Ví dụ sử dụng
+a = [0, 1, 2, 3, 4]
+b = [0, 5, 6, 7, 8]
+ket_qua = tru(a, b)
+print(ket_qua)
