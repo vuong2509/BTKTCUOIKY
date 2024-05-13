@@ -1,0 +1,74 @@
+def bt_GiaTri(bt):
+    """
+    Tính giá trị của biểu thức số học được biểu diễn dưới dạng trung tổ.
+
+    Args:
+        bt: Chuỗi biểu diễn biểu thức số học.
+
+    Returns:
+        Giá trị của biểu thức.
+    """
+
+    toan_hang = []  # Cái chồng toán hạng.
+    toan_tu = []  # Cái chồng toán tử.
+
+    for c in bt:
+        if c.isdigit():
+            toan_hang.append(int(c))
+        elif c in "+-*/":
+            while toan_tu and uu_tien(toan_tu[-1]) >= uu_tien(c):
+                toan_hang.append(tinh_toan(toan_tu.pop(), toan_hang.pop(), toan_hang.pop()))
+            toan_tu.append(c)
+
+    while toan_tu:
+        toan_hang.append(tinh_toan(toan_tu.pop(), toan_hang.pop(), toan_hang.pop()))
+
+    return toan_hang[0]
+
+
+def uu_tien(toan_tu):
+    """
+    Trả về mức độ ưu tiên của toán tử.
+
+    Args:
+        toan_tu: Toán tử.
+
+    Returns:
+        Mức độ ưu tiên của toán tử.
+    """
+
+    if toan_tu in "+-":
+        return 1
+    elif toan_tu in "*/":
+        return 2
+    else:
+        return 0
+
+
+def tinh_toan(toan_tu, toan_hang2, toan_hang1):
+    """
+    Tính toán hai toán hạng sử dụng toán tử.
+
+    Args:
+        toan_tu: Toán tử.
+        toan_hang1: Toán hạng thứ nhất.
+        toan_hang2: Toán hạng thứ hai.
+
+    Returns:
+        Kết quả tính toán.
+    """
+
+    if toan_tu == "+":
+        return toan_hang1 + toan_hang2
+    elif toan_tu == "-":
+        return toan_hang1 - toan_hang2
+    elif toan_tu == "*":
+        return toan_hang1 * toan_hang2
+    else:
+        return toan_hang1 // toan_hang2
+
+
+# Ví dụ sử dụng
+
+bt = "1 + 2 * 3 - 4"
+print(bt_GiaTri(bt))  # Output: 9

@@ -1,0 +1,61 @@
+class Node:
+    def __init__(self, info):
+        self.info = info
+        self.next = None
+
+
+def dslk_DaoNguoc(head):
+    """
+    Đảo ngược danh sách liên kết `head`.
+
+    Args:
+        head (Node): Đầu danh sách liên kết.
+
+    Returns:
+        Node: Đầu danh sách liên kết sau khi đảo ngược.
+    """
+
+    if head is None or head.next is None:
+        return head
+
+    stack = []
+    node = head
+    while node is not None:
+        stack.append(node)
+        node = node.next
+
+    head = stack.pop()
+    node = head
+    while stack:
+        node.next = stack.pop()
+        node = node.next
+
+    node.next = None
+    return head
+
+
+# Ví dụ sử dụng
+
+n1 = Node(1)
+n2 = Node(2)
+n3 = Node(3)
+n4 = Node(4)
+
+n1.next = n2
+n2.next = n3
+n3.next = n4
+
+head = n1
+
+print("Danh sách liên kết trước khi đảo ngược:")
+node = head
+while node is not None:
+    print(node.info, end=" ")
+    node = node.next
+
+print("\nDanh sách liên kết sau khi đảo ngược:")
+head = dslk_DaoNguoc(head)
+node = head
+while node is not None:
+    print(node.info, end=" ")
+    node = node.next

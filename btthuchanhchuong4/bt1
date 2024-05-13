@@ -1,0 +1,30 @@
+class Node:
+  def __init__(self, data, next=None):
+    self.data = data
+    self.next = next
+
+def InNguocDeQuy(head):
+  if head is None:
+    return
+  InNguocDeQuy(head.next)
+  print(head.data)
+
+def InNguocKhongDeQuy(head):
+  stack = []
+  while head is not None:
+    stack.append(head)
+    head = head.next
+  while stack:
+    node = stack.pop()
+    print(node.data)
+
+# Ví dụ
+head = Node(1)
+head.next = Node(2)
+head.next.next = Node(3)
+
+print("In ngược đệ quy:")
+InNguocDeQuy(head)
+
+print("In ngược không đệ quy:")
+InNguocKhongDeQuy(head)

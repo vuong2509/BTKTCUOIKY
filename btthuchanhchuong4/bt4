@@ -1,0 +1,72 @@
+def hau_to(bt):
+    """
+    Chuyển đổi biểu thức số học dạng trung tố sang dạng hậu tố
+
+    Args:
+        bt (str): Chuỗi biểu diễn biểu thức số học dạng trung tố
+
+    Returns:
+        str: Chuỗi biểu diễn biểu thức số học dạng hậu tố
+    """
+    # Khởi tạo hai cái chồng
+    stack_toan_hang = []
+    stack_toan_tu = []
+
+    for c in bt:
+        if c.isdigit():
+            # Thêm toán hạng vào chồng toán hạng
+            stack_toan_hang.append(c)
+        elif c in "+-*/":
+            # Xử lý toán tử
+            while stack_toan_tu and uu_tien(stack_toan_tu[-1]) >= uu_tien(c):
+                # Lấy toán tử ra khỏi chồng toán tử và thêm vào chuỗi kết quả
+                toan_tu = stack_toan_tu.pop()
+                stack_toan_hang.append(toan_tu)
+
+            # Thêm toán tử vào chồng toán tử
+            stack_toan_tu.append(c)
+        elif c == "(":
+            # Thêm dấu ngoặc mở vào chồng toán tử
+            stack_toan_tu.append("(")
+        elif c == ")":
+            # Xử lý dấu ngoặc đóng
+            while stack_toan_tu and stack_toan_tu[-1] != "(":
+                # Lấy toán tử ra khỏi chồng toán tử và thêm vào chuỗi kết quả
+                toan_tu = stack_toan_tu.pop()
+                stack_toan_hang.append(toan_tu)
+
+            # Bỏ dấu ngoặc mở khỏi chồng toán tử
+            stack_toan_tu.pop()
+
+    # Lấy toán tử còn lại ra khỏi chồng toán tử và thêm vào chuỗi kết quả
+    while stack_toan_tu:
+        toan_tu = stack_toan_tu.pop()
+        stack_toan_hang.append(toan_tu)
+
+    # Chuyển đổi chuỗi toán hạng thành chuỗi biểu thức dạng hậu tố
+    result = "".join(stack_toan_hang)
+    return result
+
+
+def uu_tien(toan_tu):
+    """
+    Trả về mức độ ưu tiên của toán tử
+
+    Args:
+        toan_tu (str): Toán tử cần xác định mức độ ưu tiên
+
+    Returns:
+        int: Mức độ ưu tiên của toán tử
+    """
+    if toan_tu in "+-":
+        return 1
+    elif toan_tu in "*/":
+        return 2
+    else:
+        return 0
+
+
+# Ví dụ sử dụng
+bt = "2+3*5"
+result = hau_to(bt)
+print(result)  # Output: 235 * +

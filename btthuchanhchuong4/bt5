@@ -1,0 +1,26 @@
+def move(n, source, auxiliary, destination):
+  """
+  Di chuyển n đĩa từ tháp nguồn sang tháp đích thông qua tháp phụ trợ.
+
+  Args:
+    n: Số đĩa.
+    source: Vị trí tháp nguồn.
+    auxiliary: Vị trí tháp phụ trợ.
+    destination: Vị trí tháp đích.
+  """
+  if n == 1:
+    print(f"Di chuyển đĩa {n} từ {source} sang {destination}")
+    return
+  move(n - 1, source, destination, auxiliary)
+  print(f"Di chuyển đĩa {n} từ {source} sang {destination}")
+  move(n - 1, auxiliary, source, destination)
+
+def main():
+  """
+  Chương trình chính.
+  """
+  n = int(input("Nhập số đĩa: "))
+  move(n, 1, 2, 3)
+
+if __name__ == "__main__":
+  main()
